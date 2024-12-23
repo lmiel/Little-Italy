@@ -1,0 +1,35 @@
+# Framework principal
+Django>=4.2,<5.0
+
+# Django REST Framework para construir APIs
+djangorestframework>=3.14.0
+
+# Manejo de imágenes
+Pillow>=9.0.0
+
+# Librería para realizar solicitudes HTTP a APIs externas
+requests>=2.28.0
+
+# Manejo de CORS (si el frontend se sirve desde un dominio diferente)
+django-cors-headers>=3.13.0
+
+# Integración con Stripe para pagos
+stripe>=5.0.0
+
+# Adaptador de base de datos PostgreSQL
+psycopg2-binary>=2.9.0
+
+# Gestión de variables de entorno
+django-environ>=0.9.0
+
+# Servidor WSGI para despliegue
+gunicorn>=20.1.0
+
+# Filtrado para las APIs de Django REST Framework (opcional pero recomendado)
+django-filter>=23.1.0
+
+# Autenticación con JWT (si prefieres JWT sobre tokens tradicionales)
+djangorestframework-simplejwt>=5.2.0
+
+# Librería para manejar configuraciones seguras (opcional)
+python-dotenv>=1.0.0
