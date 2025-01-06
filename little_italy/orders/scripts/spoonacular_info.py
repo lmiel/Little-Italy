@@ -8,7 +8,7 @@ environ.Env.read_env()
 
 class SpoonacularInfo:
     def __init__(self):
-        self.api_key = "5524b40bfb124b5caf789a840299da19"
+        self.api_key = ""
         self.base_url = "https://api.spoonacular.com"
 
     def get_recipes_by_name(self, name):
