@@ -1,0 +1,46 @@
+{% extends 'little_italy/base.html' %}
+{% load static %}
+{% block title %}Home - Ristorante Little Italy{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="display-4">Bienvenido a Ristorante Little Italy</h1>
+    <p class="lead">Disfruta de los sabores auténticos de Italia.</p>
+    <hr class="my-4">
+    <p>Explora nuestro menú y realiza tus pedidos desde la comodidad de tu hogar.</p>
+    {% comment %} <a class="btn btn-primary btn-lg" href="{% url 'products' %}" role="button">Ver Productos</a> {% endcomment %}
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'img/pasta.jpg' %}" class="card-img-top" alt="Deliciosa Pasta">
+            <div class="card-body">
+                <h5 class="card-title">Pastas Frescas</h5>
+                <p class="card-text">Elige entre nuestra selección de pastas hechas con ingredientes frescos y
+                    auténticos.</p>
+                {% comment %} <a href="{% url 'products' %}" class="btn btn-outline-primary">Explorar</a> {% endcomment %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'img/pizza.jpg' %}" class="card-img-top" alt="Pizza Artesanal">
+            <div class="card-body">
+                <h5 class="card-title">Pizzas Artesanales</h5>
+                <p class="card-text">Descubre nuestras pizzas hechas en horno de piedra con sabores únicos.</p>
+                {% comment %} <a href="{% url 'products' %}" class="btn btn-outline-primary">Explorar</a> {% endcomment %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'img/dessert.jpg' %}" class="card-img-top" alt="Postres Italianos">
+            <div class="card-body">
+                <h5 class="card-title">Postres Italianos</h5>
+                <p class="card-text">Termina tu comida con nuestros tradicionales postres italianos.</p>
+                {% comment %} <a href="{% url 'products' %}" class="btn btn-outline-primary">Explorar</a> {% endcomment %}
+            </div>
+        </div>
+</div>
+{% endblock %}

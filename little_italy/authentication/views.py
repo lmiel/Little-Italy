@@ -42,7 +42,7 @@ def user_login(request):
         if user is not None:
             login(request, user)
             messages.success(request, "Inicio de sesión exitoso.")
-            return redirect("streaming:home")
+            return redirect("home")
         else:
             messages.error(
                 request, "Credenciales inválidas. Por favor, inténtalo de nuevo."

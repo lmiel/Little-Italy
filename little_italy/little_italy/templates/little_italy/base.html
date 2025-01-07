@@ -21,23 +21,23 @@
                         <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'products' %}">Productos</a>
+                        {% comment %} <a class="nav-link" href="{% url 'products' %}">Productos</a> {% endcomment %}
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'cart' %}">Carrito</a>
+                        {% comment %} <a class="nav-link" href="{% url 'cart' %}">Carrito</a> {% endcomment %}
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'profile' %}">Mi Perfil</a>
+                            {% comment %} <a class="nav-link" href="{% url 'profile' %}">Mi Perfil</a> {% endcomment %}
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+                            <a class="nav-link" href="{% url 'authentication:logout' %}">Cerrar Sesión</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Ingresar</a>
+                            <a class="nav-link" href="{% url 'authentication:login' %}">Ingresar</a>
                         </li>
                     {% endif %}
                 </ul>

@@ -2,10 +2,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from little_italy.views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('orders.urls')),
+    path('', home, name="home"),
+    # path('', include('orders.urls')),
+    path('', include('authentication.urls'))
 ]
 
 if settings.DEBUG:
