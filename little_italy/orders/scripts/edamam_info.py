@@ -8,8 +8,8 @@ environ.Env.read_env()
 
 class EdamamInfo:
     def __init__(self):
-        self.api_key = ""
-        self.app_id=""
+        self.api_key = "d35b69bc"
+        self.app_id="84c24763d12c96221277d1c87d44591d"
         self.base_url = "https://api.edamam.com"
 
 
