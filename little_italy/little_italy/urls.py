@@ -5,10 +5,10 @@ from django.conf.urls.static import static
 from little_italy.views import home
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', home, name="home"),
-    path('', include('orders.urls')),
-    path('', include('authentication.urls'))
+    path("admin/", admin.site.urls),
+    path("", home, name="home"),
+    path("", include("orders.urls")),
+    path("", include("authentication.urls")),
 ]
 
 if settings.DEBUG:
