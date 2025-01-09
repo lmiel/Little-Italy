@@ -1,15 +1,12 @@
 import requests
 import json
 import os
-import environ
-
-env = environ.Env()
-environ.Env.read_env()
+from decouple import config
 
 class EdamamInfo:
     def __init__(self):
-        self.api_key = "d35b69bc"
-        self.app_id="84c24763d12c96221277d1c87d44591d"
+        self.api_key = config("EDAMAM_API_KEY")
+        self.app_id= config("EDAMAM_APPLICATION_ID")
         self.base_url = "https://api.edamam.com"
 
 

@@ -34,4 +34,4 @@ djangorestframework-simplejwt>=5.2.0
 # Librería para manejar configuraciones seguras (opcional)
 python-dotenv>=1.0.0
 
-django-environ
+django-decouple

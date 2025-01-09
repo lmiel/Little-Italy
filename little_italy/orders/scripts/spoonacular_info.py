@@ -2,18 +2,16 @@ import requests
 # ESTO LE HE CAMBIADO PQ NO ME IBA LO DEL ENVIRON
 """
 
-import json
+import json"""
 import os
-import environ
+from decouple import config
 
-env = environ.Env()
-environ.Env.read_env()
-"""
+
 import requests
 
 class SpoonacularInfo:
     def __init__(self):
-        self.api_key = "5524b40bfb124b5caf789a840299da19"
+        self.api_key = config("SPOONACULAR_API_KEY")
         self.base_url = "https://api.spoonacular.com"
 
     def get_recipes_by_name(self, name):
@@ -32,9 +30,9 @@ class SpoonacularInfo:
 
 api_requests = SpoonacularInfo()
 # Solicitudes API -Obtener Pizza,Pasta,Postres
-recipes = api_requests.get_recipes_by_name("pizza")
-recipes_pasta = api_requests.get_recipes_by_name("pasta")
-recipes_desserts = api_requests.get_recipes_by_name("dessert")
+# recipes = api_requests.get_recipes_by_name("pizza")
+# recipes_pasta = api_requests.get_recipes_by_name("pasta")
+# recipes_desserts = api_requests.get_recipes_by_name("dessert")
 
 
 # Para probarlo y ver si todo va bien --Acordarse de borrarlo
