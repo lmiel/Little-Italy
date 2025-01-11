@@ -1,24 +1,36 @@
-{% extends "little_italy/base.html" %}
 {% load static %}
-{% block content %}
-
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú del Restaurante</title>
+    <!-- Cargar el archivo CSS -->
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Little Italy Ristorante</h1>
+    </header>
     <div class="menu-container">
         <h1>Menú del Restaurante</h1>
-
+    
         {% for category, recipes in categories.items %}
             <div class="category">
                 <h2>{{ category }}</h2>
                 <div class="menu-grid">
                     {% for recipe in recipes %}
-                        <a href="{% url 'menu_item' recipe.id %}">
-                            <div class="menu-item">
-                                <img src="{{ recipe.image }}" alt="{{ recipe.name }}">
-                                <h3>{{ recipe.name }}</h3>
-                            </div>
-                        </a>
+                        <div class="menu-item">
+                            <a href="{% url 'dish_detail' recipe.id %}">
+                                <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
+                                <h3>{{ recipe.title }}</h3>
+                            </a>
+                        </div>
                     {% endfor %}
                 </div>
             </div>
         {% endfor %}
     </div>
-{% endblock %}
+</body>
+</html>

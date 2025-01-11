@@ -5,32 +5,24 @@ from django.shortcuts import redirect
 
 
 def menu_view(request):
-    # api = SpoonacularInfo()
-
-    # # Obtener recetas por categorías
-    # pizzas = api.get_recipes_by_name("pizza").get("results", [])
-    # pastas = api.get_recipes_by_name("pasta").get("results", [])
-    # desserts = api.get_recipes_by_name("dessert").get("results", [])
-
-    # # Estructura las recetas
-    # categories = {
-    #     "Pizzas": [{"title": item["title"], "image": item["image"], "id": item["id"]} for item in pizzas],
-    #     "Pastas": [{"title": item["title"], "image": item["image"], "id": item["id"]} for item in pastas],
-    #     "Postres": [{"title": item["title"], "image": item["image"], "id": item["id"]} for item in desserts],
-    # }
-
-    # # menu.html
-    # return render(request, "orders/menu.html", {"categories": categories})
-    # Obtener todos los items de la base de datos
-    items = Item.objects.all()
-    categories = {}
-    for item in items:
-        if item.type not in categories:
-            categories[item.type] = []
-        categories[item.type].append(item)
+    api = SpoonacularInfo()
+    
+    # Obtener recetas por categorías
+    pizzas = api.get_recipes_by_name("pizza").get("results", [])
+    pastas = api.get_recipes_by_name("pasta").get("results", [])
+    desserts = api.get_recipes_by_name("dessert").get("results", [])
+    
+    # Estructura las recetas
+    categories = {
+        "Pizzas": [{"title": item["title"], "image": item["image"], "id": item["id"]} for item in pizzas],
+        "Pastas": [{"title": item["title"], "image": item["image"], "id": item["id"]} for item in pastas],
+        "Postres": [{"title": item["title"], "image": item["image"], "id": item["id"]} for item in desserts],
+    }
+    
+    # menu.html
     return render(request, "orders/menu.html", {"categories": categories})
 
-
+#MENU
 def update_menu(request):
     api = SpoonacularInfo()
 
@@ -59,7 +51,19 @@ def update_menu(request):
             )
     return redirect("menu")
 
-
+#PEDIDOS
 def view_item(request, item_id):
     item = Item.objects.get(id=item_id)
     return render(request, "orders/item.html", {"item": item})
+
+#INFO MENU
+def dish_detail_view(request, dish_id):
+    """
+    Vista para mostrar los detalles de un plato.
+    """
+    api_requests = SpoonacularInfo()
+    dish_details = api_requests.get_recipe_details(dish_id)  # Obtiene ingredientes y calorías
+
+
+    # Pasar los datos a la plantilla
+    return render(request, "orders/dish_detail.html", {"details": dish_details})

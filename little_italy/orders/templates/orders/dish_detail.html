@@ -1,0 +1,22 @@
+{% extends "little_italy/base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <!-- Título del plato -->
+    <h1>{{ details.title }}</h1>
+    
+    <!-- Imagen del plato -->
+    <img src="{{ details.image }}" alt="{{ details.title }}">
+
+    <!-- Ingredientes -->
+    <h2>Ingredients</h2>
+    <ul>
+        {% for ingredient in details.ingredients %}
+            <li>{{ ingredient }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Calorías -->
+    <h2>Kcal</h2>
+    <p><strong>{{ details.calories }}</strong> kcal</p>
+</div>
+{% endblock %}
