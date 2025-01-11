@@ -1,0 +1,44 @@
+{% extends "little_italy/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Your Cart</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Ingredients</th>
+                    <th>Nutritional Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart.items.all %}
+                <tr>
+                    <td><img src="{{ item.image.url }}" alt="{{ item.name }}" class="img-fluid" width="100"></td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.type }}</td>
+                    <td>{{ item.size }}</td>
+                    <td>${{ item.price }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.ingredients }}</td>
+                    <td>
+                        {% for key, value in item.nutritional_value.items %}
+                            <strong>{{ key }}:</strong> {{ value }}<br>
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-right mt-4">
+        <h2>Total: ${{ cart.total }}</h2>
+    </div>
+</div>
+{% endblock %}

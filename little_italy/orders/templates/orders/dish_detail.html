@@ -1,22 +1,73 @@
 {% extends "little_italy/base.html" %}
+{% load static %}
 {% block content %}
-<div class="container mt-5">
-    <!-- Título del plato -->
-    <h1>{{ details.title }}</h1>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="{{ item.image }}" class="img-fluid rounded" alt="{{ item.name }}" style="width: 100%;">
+                                <div class="mt-4">
+                                    <h5>Información Nutricional:</h5>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nutriente</th>
+                                                <th scope="col">Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for key, value in item.nutritional_value.items %}
+                                                <tr>
+                                                    <td><strong>{{ key }}</strong></td>
+                                                    <td>{{ value }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h1 class="card-title">{{ item.name }}</h1>
+                                <p class="card-text">{{ item.description|safe }}</p>
+                                <h4 class="text-primary">Precio: ${{ item.price }}</h4>
+                                <form id="add-to-cart-form" method="post" class="mt-4">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="quantity">Cantidad:</label>
+                                        <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1">
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-block mt-3">Agregar al carrito</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
-    <!-- Imagen del plato -->
-    <img src="{{ details.image }}" alt="{{ details.title }}">
-
-    <!-- Ingredientes -->
-    <h2>Ingredients</h2>
-    <ul>
-        {% for ingredient in details.ingredients %}
-            <li>{{ ingredient }}</li>
-        {% endfor %}
-    </ul>
-
-    <!-- Calorías -->
-    <h2>Kcal</h2>
-    <p><strong>{{ details.calories }}</strong> kcal</p>
-</div>
 {% endblock %}
+<script>
+    document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
+        const quantity = document.getElementById('quantity').value;
+        const itemId = '{{ item.id }}';
+        const csrfToken = '{{ csrf_token }}';
+
+        fetch(`{% url 'add_item' item.id %}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+            },
+            body: JSON.stringify({ quantity: quantity })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
