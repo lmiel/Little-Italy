@@ -16,21 +16,39 @@
         <div class="container">
             <h2 class="text-center mb-4">Nuestros productos</h2>
             <div class="row justify-content-center">
-                <div class="col-6 col-md-3 mb-3">
-                    <div class="producto bg-secondary rounded" style="height: 150px;"></div>
+                <!-- Producto 1: Pizza -->
+                <div class="col-6 col-md-4 mb-3">
+                    <div class="producto position-relative">
+                        <img src="{% static 'img/pizza.jpg' %}" alt="Pizza" class="img-fluid rounded">
+                        <div class="producto-hover position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-white">
+                            <h3 class="fw-bold">PIZZAS</h3>
+                            <p>La especialidad de la casa: pizzas tradicionales, phil, dulces y recetas propias.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <div class="producto bg-secondary rounded" style="height: 150px;"></div>
+                <!-- Producto 2: Pasta -->
+                <div class="col-6 col-md-4 mb-3">
+                    <div class="producto position-relative">
+                        <img src="{% static 'img/pasta.jpg' %}" alt="Pasta" class="img-fluid rounded">
+                        <div class="producto-hover position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-white">
+                            <h3 class="fw-bold">PASTA</h3>
+                            <p>Deliciosas recetas de pasta al estilo italiano con ingredientes frescos.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <div class="producto bg-secondary rounded" style="height: 150px;"></div>
-                </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <div class="producto bg-secondary rounded" style="height: 150px;"></div>
+                <!-- Producto 3: Postre -->
+                <div class="col-6 col-md-4 mb-3">
+                    <div class="producto position-relative">
+                        <img src="{% static 'img/dessert.jpg' %}" alt="Postres" class="img-fluid rounded">
+                        <div class="producto-hover position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-dark" style="background-color: rgba(255, 255, 255, 0.8);">
+                            <h3 class="fw-bold">POSTRES</h3>
+                            <p>Si aún tienes hambre, prueba alguno de nuestros especiales postres.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="text-center mt-3">
-                <a href="{% url 'menu' %}" class="btn btn-outline-danger" >Ver todas</a>
+                <a href="{% url 'menu' %}" class="btn btn-outline-danger">Ver todas</a>
             </div>
         </div>
     </section>
