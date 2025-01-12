@@ -5,7 +5,9 @@ Link Github: https://github.com/lmiel/Little-Italy.git
 ## Contribuidores
 
 Lucía Mielgo Torres (lmiel & matzull)
+
 Martina González García (martinagg7)
+
 
 Este es un proyecto de una página web interactiva para un restaurante italiano, diseñada para ofrecer a los usuarios la posibilidad de explorar un menú digital, hacer pedidos en línea y conocer más sobre las recetas auténticas italianas y sus valores nutricionales.
 
