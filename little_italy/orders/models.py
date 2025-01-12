@@ -10,7 +10,7 @@ class Item(models.Model):
     size = models.CharField(max_length=100, null=True)
     price = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     description = models.TextField(null=True)
-    image = models.URLField(max_length=200, null=True, blank=True)
+    image = models.URLField(max_length=300, null=True, blank=True)
     ingredients = models.TextField(null=True, blank=True)
     nutritional_value = models.JSONField(null=True, blank=True)
 

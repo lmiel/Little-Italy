@@ -1,17 +1,17 @@
 {% extends 'little_italy/base.html' %}
 {% load static %}
 {% block content %}
-  <h1>Menú del Restaurante</h1>
+  <h1 class="text-center">Nuestro Menú</h1>
 
   {% for category, recipes in categories.items %}
     <div class="category">
-      <h2>{{ category }}</h2>
+      <h2 id={{ category }} class="text-center" style="display: list-item; margin-top: 2%;">{{ category }}</h2>
       <div class="menu-grid">
         {% for recipe in recipes %}
           <div class="menu-item">
-            <a href="{% url 'dish_detail' recipe.spoonacular_id %}">
+            <a href="{% url 'dish_detail' recipe.spoonacular_id %}" style="text-decoration: none;">
               <img src="{{ recipe.image }}" alt="{{ recipe.name }}" />
-              <h3>{{ recipe.name }}</h3>
+              <h3 class="text-center">{{ recipe.name }}</h3>
             </a>
           </div>
         {% endfor %}

@@ -1,21 +1,20 @@
-<!-- checkout.html -->
-
 {% extends "little_italy/base.html" %}
 
 {% block content %}
   <div class="container mt-5">
     <h2 class="text-center mb-4">Detalles del Pago</h2>
-
-    <form method="POST">
+    
+    <!-- Formulario de pago -->
+    <form method="POST" class="shadow-lg p-4 rounded bg-light">
       {% csrf_token %}
 
-      <!-- Nombre -->
+      <!-- Nombre Completo -->
       <div class="mb-3">
         <label for="name" class="form-label">Nombre Completo</label>
         {{ form.name }}
       </div>
 
-      <!-- Correo electrónico -->
+      <!-- Correo Electrónico -->
       <div class="mb-3">
         <label for="email" class="form-label">Correo Electrónico</label>
         {{ form.email }}
@@ -27,8 +26,8 @@
         {{ form.address }}
       </div>
 
-      <!-- Detalles de la tarjeta -->
-      <h3 class="mt-4">Detalles de la Tarjeta</h3>
+      <!-- Detalles de la Tarjeta -->
+      <h3 class="mt-4 mb-3">Detalles de la Tarjeta</h3>
 
       <div class="mb-3">
         <label for="card_number" class="form-label">Número de Tarjeta</label>
@@ -36,25 +35,27 @@
       </div>
 
       <div class="row">
-        <div class="col-6 mb-3">
+        <div class="col-md-6 mb-3">
           <label for="expiry_date" class="form-label">Fecha de Expiración</label>
           {{ form.expiry_date }}
         </div>
-        <div class="col-6 mb-3">
+        <div class="col-md-6 mb-3">
           <label for="cvv" class="form-label">CVV</label>
           {{ form.cvv }}
         </div>
       </div>
 
-      <!-- Precio total -->
+      <!-- Precio Total -->
       <div class="mb-3">
         <label for="total_price" class="form-label">Precio Total</label>
-        {{ total_price }}
+        <div class="p-3 bg-dangerous text-white rounded text-center">
+          <h4>${{ total_price }}</h4>
+        </div>
       </div>
 
       <!-- Botón de pago -->
       <div class="d-flex justify-content-center mt-4">
-        <button type="submit" class="btn btn-primary">Completar Pago</button>
+        <button type="submit" class="btn btn-dangerous btn-lg w-50">Completar Pago</button>
       </div>
     </form>
   </div>

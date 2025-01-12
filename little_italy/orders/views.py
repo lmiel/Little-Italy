@@ -14,10 +14,8 @@ from decimal import Decimal
 
 def menu_view(request):
     items = Item.objects.all()
-    categories = {}
+    categories = {"Pizza": [], "Pastas": [], "Desserts": []}
     for item in items:
-        if item.type not in categories:
-            categories[item.type] = []
         categories[item.type].append(item)
     return render(request, "orders/menu.html", {"categories": categories})
 
@@ -104,6 +102,7 @@ def remove_from_cart(request, dish_id):
         cart_item.delete()
     cart.total -= Decimal(item.price)
     cart.save()
+
     return redirect("cart")
 
 
@@ -111,6 +110,7 @@ def remove_from_cart(request, dish_id):
 def cart_view(request):
     cart, created = Cart.objects.get_or_create(user=request.user)
     cart_items = CartItem.objects.filter(cart=cart)
+
     return render(
         request,
         "orders/cart.html",

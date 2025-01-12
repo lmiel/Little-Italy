@@ -33,14 +33,18 @@
                                 <h1 class="card-title">{{ item.name }}</h1>
                                 <p class="card-text">{{ item.description|safe }}</p>
                                 <h4 class="text-primary">Precio: ${{ item.price }}</h4>
-                                <form id="add-to-cart-form" method="post" class="mt-4" action="{% url 'add_to_cart' item.spoonacular_id %}">
-                                    {% csrf_token %}
-                                    <div class="form-group">
-                                        <label for="quantity">Cantidad:</label>
-                                        <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1">
-                                    </div>
-                                    <button type="submit" class="btn btn-success btn-block mt-3">Agregar al carrito</button>
-                                </form>
+                                {% if user.is_authenticated %}
+                                    <form id="add-to-cart-form" method="post" class="mt-4" action="{% url 'add_to_cart' item.spoonacular_id %}">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="quantity">Cantidad:</label>
+                                            <input type="number" id="quantity" name="quantity" class="form-control" value="1" min="1">
+                                        </div>
+                                        <button type="submit" class="btn btn-dangerous btn-block mt-3">Agregar al carrito</button>
+                                    </form>
+                                {% else %}
+                                    <a href="{% url 'authentication:login' %}" class="btn btn-dangerous btn-block mt-4">Ingresar para agregar al carrito</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

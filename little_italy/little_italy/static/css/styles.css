@@ -202,3 +202,25 @@ nav a {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 }
+
+.nav-link {
+    position: relative;
+}
+
+.badge {
+    top: -5px;
+    right: -50px;
+    font-size: 12px;
+}
+
+.btn-dangerous {
+    background-color: #800000;
+    border-color: #800000;
+    color: white;
+}
+
+.bg-dangerous {
+    background-color: #800000;
+    border-color: #800000;
+    color: white;
+}
