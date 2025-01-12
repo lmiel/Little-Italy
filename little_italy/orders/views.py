@@ -24,11 +24,9 @@ def menu_view(request):
 def update_menu(request):
     api = SpoonacularInfo()
 
-    # Obtener recetas por categorías
     pizzas = api.get_recipes_by_name("pizza").get("results", [])
     pastas = api.get_recipes_by_name("pasta").get("results", [])
     desserts = api.get_recipes_by_name("dessert").get("results", [])
-    # Insertar recetas en la base de datos
     for category, items in [
         ("Pizza", pizzas),
         ("Pastas", pastas),
@@ -36,7 +34,7 @@ def update_menu(request):
     ]:
         for item in items:
             Item.objects.update_or_create(
-                name=item["title"],  # Campo de búsqueda
+                name=item["title"],
                 defaults={
                     "type": category,
                     "image": item["image"],
@@ -55,7 +53,7 @@ def dish_detail_view(request, dish_id):
     spoonacular_api = SpoonacularInfo()
     dish_details = spoonacular_api.get_recipe_details(
         dish_id
-    )  # Obtiene ingredientes y calorías
+    )
     item.ingredients = dish_details["ingredients"]
     item.description = dish_details["summary"]
     edamam_api = EdamamInfo()
@@ -70,11 +68,9 @@ def dish_detail_view(request, dish_id):
     item.price = round(random.uniform(*price_ranges.get(item.type, (0.0, 0.0))), 1)
     item.save()
 
-    # Pasar los datos a la plantilla
     return render(request, "orders/dish_detail.html", {"item": item})
 
 
-# CART
 @csrf_exempt
 @login_required
 def add_to_cart(request, dish_id):
@@ -125,16 +121,10 @@ def checkout_view(request):
     if request.method == "POST":
         form = CheckoutForm(request.POST)
         if form.is_valid():
-            # Aquí puedes simular el "procesamiento" del pago
-            # Y redirigir a una página de éxito de pago
-            # En un caso real, aquí harías la lógica de pago
-
-            # Guardar la orden en la base de datos si lo deseas (aunque sea ficticia)
+            #Aqui se implementaria la logica de pago
             order = form.save(commit=False)
             order.save()
-
-            # Redirigir a una página de éxito (simulada)
-            return redirect("payment_success")  # Asegúrate de crear esta vista
+            return redirect("payment_success")
 
     else:
         form = CheckoutForm()

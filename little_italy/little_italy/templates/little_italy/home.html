@@ -1,26 +1,28 @@
 {% extends "little_italy/base.html" %}
 {% load static %}
 {% block content %}
-    <!-- Sección del banner -->
-    <section class="banner d-flex align-items-center" style="max-width: 100%;">
+    <section class="banner d-flex align-items-center position-relative" style="max-width: 100%;">
         <div class="container text-center" style="max-width: 100%;">
             <img src="{% static 'img/pizza.jpg' %}" alt="Pizza" class="img-fluid">
-            <div class="mt-3">
-                <button class="btn btn-dangerous btn-lg">Pedir ahora</button>
+            <div class="bg-black bg-opacity-50 banner-text position-absolute top-25 start-50 translate-middle text-center p-4 rounded">
+                <h2 class="p-4 text-white text-center"><strong>Disfruta de lo mejor de Italia sin salir de tu ciudad</strong></h2>
+                <p class="text-white text-center"><strong>Explora nuestros sabores auténticos</strong></p>
             </div>
         </div>
     </section>
-
-    <!-- Sección de productos -->
+    <section class="productos-intro text-center mt-5">
+        <div class="container">
+            <h2 class="fw-bold">Descubre nuestros productos</h2>
+        </div>
+    </section>
+    
     <section class="productos mt-5">
         <div class="container">
-            <h2 class="text-center mb-4">Nuestros productos</h2>
             <div class="row justify-content-center">
-                <!-- Producto 1: Pizza -->
                 <div class="col-6 col-md-4 mb-3">
                     <a href="{% url 'menu' %}#Pizza">
                     <div class="producto position-relative">
-                        <img src="{% static 'img/pizza.jpg' %}" alt="Pizza" class="img-fluid rounded">
+                        <img src="{% static 'img/pizza2.jpg' %}" alt="Pizza" class="img-fluid rounded">
                         <div class="producto-hover position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center text-white">
                             <h3 class="fw-bold">PIZZAS</h3>
                             <p>La especialidad de la casa: pizzas tradicionales, pepperoni y recetas propias.</p>
@@ -28,7 +30,6 @@
                     </div>
                     </a>
                 </div>
-                <!-- Producto 2: Pasta -->
                 <div class="col-6 col-md-4 mb-3">
                     <a href="{% url 'menu' %}#Pastas">
                     <div class="producto position-relative">
@@ -40,7 +41,6 @@
                     </div>
                     </a>
                 </div>
-                <!-- Producto 3: Postre -->
                 <div class="col-6 col-md-4 mb-3">
                     <a href="{% url 'menu' %}#Desserts">
                     <div class="producto position-relative">
@@ -51,16 +51,23 @@
                         </div>
                     </div></a>
                 </div>
+            </div>
             <div class="text-center mt-3">
-                <a href="{% url 'menu' %}" class="btn btn-outline-danger">Ver todas</a>
+                <a href="{% url 'menu' %}" class="btn btn-outline-danger">Ver todo</a>
             </div>
         </div>
     </section>
 
-    <!-- Imagen final -->
     <section class="imagen-final mt-5">
-        <div class="container text-center">
-            <img src="{% static 'img/masa.jpg' %}" alt="Manos preparando masa" class="img-fluid rounded">
+        <div class="container d-flex align-items-center">
+            <div class="col-6">
+                <img src="{% static 'img/masa.jpg' %}" alt="Manos preparando masa" class="img-fluid rounded">
+            </div>
+            <div class="col-6 text-center">
+                <h2 class="fw-bold">Todo Artesano, Todo Hecho con Amor</h2>
+                <p>Disfruta de nuestros productos elaborados artesanalmente, con ingredientes frescos y auténticos, como si los hiciéramos para nuestra propia familia.</p>
+            </div>
         </div>
     </section>
+    
 {% endblock %}

@@ -27,7 +27,7 @@ class SpoonacularInfo:
 
             # Extraer ingredientes
             ingredients = [
-                f"{ingredient['original']}"  # {ingredient['unit']} of {ingredient['name']}
+                f"{ingredient['original']}"  
                 for ingredient in data.get("extendedIngredients", [])
             ]
 
@@ -38,10 +38,3 @@ class SpoonacularInfo:
             return {"error": f"Error {response.status_code}: {response.text}"}
 
 
-"""--->PRUEBA ELIMINAR SI NO ES NECESARIO
-api_requests = SpoonacularInfo()
-# Solicitudes API -Obtener Pizza,Pasta,Postres
-recipes = api_requests.get_recipes_by_name("pizza")
-recipes_pasta = api_requests.get_recipes_by_name("pasta")
-recipes_desserts = api_requests.get_recipes_by_name("dessert")
-"""

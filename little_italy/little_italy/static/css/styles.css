@@ -36,12 +36,22 @@ nav a {
 /* Banner Section */
 .banner {
     color: white;
+    position: relative; /* Asegura que los elementos se puedan posicionar dentro del contenedor */
 }
 
 .banner img {
     width: 100%;
     max-height: 400px;
     object-fit: cover;
+}
+
+.banner-text {
+    position: absolute;
+    top: 50%; /* Centra verticalmente el texto */
+    left: 50%; /* Centra horizontalmente el texto */
+    transform: translate(-50%, -50%); /* Ajusta la posición centrada */
+    color: white;
+    font-size: 2rem;
 }
 
 .banner button {
@@ -62,6 +72,9 @@ nav a {
     color: #800000;
     margin-bottom: 20px;
 }
+
+/* ... (resto del código CSS sigue igual) ... */
+
 
 .producto {
     position: relative;
@@ -223,4 +236,40 @@ nav a {
     background-color: #800000;
     border-color: #800000;
     color: white;
+}
+
+.imagen-final .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.imagen-final img {
+    max-width: 100%; /* Ajusta la imagen al contenedor */
+    height: auto;
+}
+
+.imagen-final h2 {
+    color: #800000; /* Color que armoniza con tu esquema de colores */
+    font-size: 2rem;
+}
+
+.imagen-final p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.imagen-final .col-6 {
+    padding-left: 30px; /* Añadir espacio entre la imagen y el texto */
+    padding-right: 30px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.productos-intro h2 {
+    font-size: 2rem;
+    color: #800000;
+    margin-bottom: 30px;
 }
