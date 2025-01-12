@@ -10,7 +10,7 @@ class Item(models.Model):
     size = models.CharField(max_length=100, null=True)
     price = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     description = models.TextField(null=True)
-    image = models.ImageField(upload_to="images/")
+    image = models.URLField(max_length=200, null=True, blank=True)
     ingredients = models.TextField(null=True, blank=True)
     nutritional_value = models.JSONField(null=True, blank=True)
 
@@ -19,12 +19,23 @@ class Item(models.Model):
 
 
 class Cart(models.Model):
-    items = models.ManyToManyField(Item)
-    total = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    total = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
+    items = models.ManyToManyField(
+        Item, through="CartItem"
+    )  # Usamos el modelo intermedio
 
     def __str__(self):
-        return str(self.id)
+        return f"Cart {self.id} for {self.user}"
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)  # Guardar la cantidad del item
+
+    def __str__(self):
+        return f"{self.quantity} of {self.item.name} in cart {self.cart.id}"
 
 
 class Order(models.Model):

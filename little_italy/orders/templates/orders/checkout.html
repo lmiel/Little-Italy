@@ -1,0 +1,61 @@
+<!-- checkout.html -->
+
+{% extends "little_italy/base.html" %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Detalles del Pago</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <!-- Nombre -->
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre Completo</label>
+        {{ form.name }}
+      </div>
+
+      <!-- Correo electrónico -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo Electrónico</label>
+        {{ form.email }}
+      </div>
+
+      <!-- Dirección -->
+      <div class="mb-3">
+        <label for="address" class="form-label">Dirección</label>
+        {{ form.address }}
+      </div>
+
+      <!-- Detalles de la tarjeta -->
+      <h3 class="mt-4">Detalles de la Tarjeta</h3>
+
+      <div class="mb-3">
+        <label for="card_number" class="form-label">Número de Tarjeta</label>
+        {{ form.card_number }}
+      </div>
+
+      <div class="row">
+        <div class="col-6 mb-3">
+          <label for="expiry_date" class="form-label">Fecha de Expiración</label>
+          {{ form.expiry_date }}
+        </div>
+        <div class="col-6 mb-3">
+          <label for="cvv" class="form-label">CVV</label>
+          {{ form.cvv }}
+        </div>
+      </div>
+
+      <!-- Precio total -->
+      <div class="mb-3">
+        <label for="total_price" class="form-label">Precio Total</label>
+        {{ total_price }}
+      </div>
+
+      <!-- Botón de pago -->
+      <div class="d-flex justify-content-center mt-4">
+        <button type="submit" class="btn btn-primary">Completar Pago</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

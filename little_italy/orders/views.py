@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from .scripts.spoonacular_info import SpoonacularInfo
 from .models import Item
+from .forms import CheckoutForm
 from django.shortcuts import redirect
 from .scripts.edamam_info import EdamamInfo
 import random
 import json
-from .models import Cart
+from .models import Cart, CartItem
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from decimal import Decimal
 
 
 def menu_view(request):
@@ -78,11 +80,14 @@ def dish_detail_view(request, dish_id):
 @csrf_exempt
 @login_required
 def add_to_cart(request, dish_id):
-    print("Adding to cart")
+    print("Adding to cart" + str(dish_id))
     item = Item.objects.get(spoonacular_id=dish_id)
     cart, created = Cart.objects.get_or_create(user=request.user)
-    cart.items.add(item)
-    cart.total += item.price
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, item=item)
+    if not created:
+        cart_item.quantity += 1
+    cart_item.save()
+    cart.total += Decimal(item.price)
     cart.save()
     return redirect("menu")
 
@@ -91,19 +96,51 @@ def add_to_cart(request, dish_id):
 def remove_from_cart(request, dish_id):
     item = Item.objects.get(spoonacular_id=dish_id)
     cart = Cart.objects.get(user=request.user)
-    if item in cart.items.all():
-        cart.items.remove(item)
-        cart.total -= item.price
-        cart.save()
+    cart_item = CartItem.objects.get(cart=cart, item=item)
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+    cart.total -= Decimal(item.price)
+    cart.save()
     return redirect("cart")
 
 
 @login_required
 def cart_view(request):
     cart, created = Cart.objects.get_or_create(user=request.user)
-    cart_items = cart.items.all()
+    cart_items = CartItem.objects.filter(cart=cart)
     return render(
         request,
         "orders/cart.html",
         {"cart_items": cart_items, "total_price": cart.total},
+    )
+
+
+@login_required
+def checkout_view(request):
+    cart = Cart.objects.get(user=request.user)
+    cart_items = CartItem.objects.filter(cart=cart)
+    if request.method == "POST":
+        form = CheckoutForm(request.POST)
+        if form.is_valid():
+            # Aquí puedes simular el "procesamiento" del pago
+            # Y redirigir a una página de éxito de pago
+            # En un caso real, aquí harías la lógica de pago
+
+            # Guardar la orden en la base de datos si lo deseas (aunque sea ficticia)
+            order = form.save(commit=False)
+            order.save()
+
+            # Redirigir a una página de éxito (simulada)
+            return redirect("payment_success")  # Asegúrate de crear esta vista
+
+    else:
+        form = CheckoutForm()
+
+    return render(
+        request,
+        "orders/checkout.html",
+        {"form": form, "cart_items": cart_items, "total_price": cart.total},
     )
